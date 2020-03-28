@@ -11,11 +11,17 @@ want to improve the code and make it available in Python.
 Feel free to colaborate and use everything.
 
 
+## Dependencies
+
+Coppelia Robotics: you can download the educational version in [link](https://coppeliarobotics.com/downloads)
+
 ## Lib RemoteApi
 
 - To use the API correctly, insert on the project folder the remoteApi file compatible with the operating system: 
 
-.dll for windows, .so linux, and .dylib for mac 
+.dll for windows, .so linux, and .dylib for mac
+
+**OBS:** We suggest you to get the earliest API version in the Coppelia Robotics folder `/programming/remoteApiBindings/lib/lib`
 
 ## Folders and Files
 
@@ -40,3 +46,10 @@ There are three different folders in this project.
 3. Start implement the Class and organize the functions ☑
 4. Run a strategy of position controller (.py) ☑
 5. Map environment with 2D Laser Scanner (.py)
+
+
+## Contact
+
+- Matheus Berger Quemelli: matheus.quemelli@gmail.com
+- Emows Lemos: emowslemos@gmail.com
+- André Lobo : andreloboteixeira@gmail.com
