@@ -33,7 +33,7 @@ startTime=time.time()
 while time.time()-startTime < 30:
 
     # Set Position Desired
-    X_Desired = [-2, 3]
+    X_Desired = [ 2, 3]
 
     # Get Real Position From Robot
     P.get_PositionData()
