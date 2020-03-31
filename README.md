@@ -4,7 +4,7 @@ The class developed here was created to communicate
 Coppelia Simulator with Matlab Software. Now, we
 want to improve the code and make it available in Python.
 
-<img src="https://media.giphy.com/media/dU0jVmU13fQuDCmntQ/giphy.gif" height="250" width="350">
+<img src="https://media.giphy.com/media/fW4PzpIV9itKgYdIxF/giphy.gif" height="250" width="450">
 
 ## Learning purposes
 
@@ -37,7 +37,7 @@ There are three different folders in this project.
 
 3. Python Folder:
 
-    Contains the Class to comunicate with CoppeliaSim and Python. The main file is CoppeliaSimClass.py (Contructor Class).
+    Contains the Class to comunicate with CoppeliaSim and Python. The main file is CoppeliaSimClass.py (Constructor Class).
 
 ## TO-DO
 
@@ -45,7 +45,8 @@ There are three different folders in this project.
 2. Load the mobile robot Pioneer 3DX and if possible, move it (.py) ☑
 3. Start implement the Class and organize the functions ☑
 4. Run a strategy of position controller (.py) ☑
-5. Map environment with 2D Laser Scanner (.py)
+5. Map environment with 2D Laser Scanner (.py) ☑
+6. Implement avoidance algorithm (Potential Fields)
 
 
 ## Contact
