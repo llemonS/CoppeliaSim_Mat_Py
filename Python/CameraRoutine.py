@@ -2,13 +2,13 @@
 # Before run this code, open the CoppeliaSim simulator 
 # and load the file scene.ttt
 # This example starts the simulation by itself.
-# The Circle_Trajectory.py shows how to control Pioneer 3DX in a circle,
+# The MainRoutine.py shows how to control Pioneer 3DX,
 # a mobile differencial drive robot.
 # The controller applied is based on Lyapunov Theory.
 
 from Coppelia import Coppelia
 from Pioneer3DX import Pioneer3DX
-from LaserSensor import LaserSensor
+from CameraSensor import CameraSensor
 import matplotlib.pyplot as plt
 import time
 import numpy as np
@@ -20,25 +20,27 @@ CoppeliaSim.start_Simulation()
 # Load Mobile Robot Pioneer 3DX
 Pioneer3DX = Pioneer3DX(CoppeliaSim.clientID)
 
-# Load Laser Scanner
-Laser = LaserSensor(CoppeliaSim.clientID)
+# Setup Sensor Figure
+# Load Camera Sensor
+Camera = CameraSensor(CoppeliaSim.clientID)
+time.sleep(2)
 
-# Config plot
-shouldPlot = True
-realRobotTraject_x, realRobotTraject_y = [], []
+Resol_XY, image = Camera.get_SnapShot()
 fig, ax = plt.subplots()
-laserPointsPlot, = ax.plot(realRobotTraject_x, realRobotTraject_y, 'bo', ms=2)
-realRobotTrajectPlot, = ax.plot(realRobotTraject_x, realRobotTraject_y, 'k-')
-ax.set_xlim(-6,6)
-ax.set_ylim(-6,6)
+Image_object = ax.imshow(image)
 fig.show()
+
+#lt.imshow(image)
+#plt.show()
+
+shouldPlot = True
 
 ## Main Routine
 X_Desired = [0,0]
 X_diff = [0,0]
 # Start time routine
 startTime=time.time()
-while time.time()-startTime < 30:
+while time.time()-startTime < 90:
     t = time.time()-startTime
 
     # Set desired trajectory
@@ -58,28 +60,14 @@ while time.time()-startTime < 30:
     Xtil = np.array([X_Desired - X_currRealPos[0:2]])
     # Get control signal from Lyapunov Control
     Ud = Pioneer3DX.lyapunov_controller_signal(Kinematic_matrix, X_diff, Xtil.transpose())
-    
-    
-    # Get Laser Scanner data
-    currLaserDataX, currLaserDataY = Laser.get_LaserData(X_currRealPos[0:2],X_currRealOrientation)
-
-    #Distance from Robot to obstacles
-    
-
 
     # Send control signal to Pioneer
     Pioneer3DX.send_ControlSignals(Ud)
 
     # flag to activate plot
     if shouldPlot:
-        #print('*** PLOT')
-        # Save the X and Y robot coordinates and...
-        realRobotTraject_x.append(X_currRealPos[0])
-        realRobotTraject_y.append(X_currRealPos[1])
-        # ... update plot
-        laserPointsPlot.set_data(currLaserDataX, currLaserDataY)
-        realRobotTrajectPlot.set_data(realRobotTraject_x,realRobotTraject_y)
-
+        Resol_XY, image = Camera.get_SnapShot()
+        Image_object.set_data(image)
         fig.canvas.draw()
         plt.pause(0.1)
     else:

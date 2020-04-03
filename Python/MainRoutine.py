@@ -8,6 +8,7 @@
 
 from Coppelia import Coppelia
 from Pioneer3DX import Pioneer3DX
+import matplotlib.pyplot as plt
 import time
 import numpy as np
 
@@ -21,10 +22,14 @@ P = Pioneer3DX(CoppeliaSim.clientID)
 ## Main Routine
 # Start time routine
 startTime=time.time()
-while time.time()-startTime < 30:
+while time.time()-startTime < 5:
 
     # Set Position Desired
+<<<<<<< HEAD
     X_Desired = [ 2, 3]
+=======
+    X_Desired = [3,0]
+>>>>>>> 30d4ed6d5b2e231539a203c41ae62f82a8c0bac9
 
     # Get Real Position From Robot
     P.get_PositionData()
@@ -44,11 +49,14 @@ while time.time()-startTime < 30:
     # Lyapunov Controller: Ud = K^-1*(0.7*tanh(0.5Xtil))
     b = 0.7*np.tanh(0.5*Xtil)
     Ud = np.dot(a,b)
-
+    
+    
     # Send control signal to Pioneer
     P.send_ControlSignals(Ud)
 
     time.sleep(0.1)
+
+
 
 # Stop the Simulation when you finish the routine
 CoppeliaSim.stop_Simulation()
